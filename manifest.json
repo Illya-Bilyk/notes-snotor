@@ -1,0 +1,20 @@
+{
+  "short_name": "Notes",
+  "name": "Notes Snotor",
+  "icons": [
+    {
+      "src": "notes-32x32.png",
+      "sizes": "64x64 32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "notes-16x16.png",
+      "sizes": "24x24 16x16",
+      "type": "image/png"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
