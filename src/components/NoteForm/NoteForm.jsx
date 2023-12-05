@@ -1,44 +1,47 @@
-import { useState } from 'react';
-import { Form, Field, Button } from '../TaskForm/TaskForm.styled';
-import { Title } from './ModalEditForm.styled';
+import { Form, Field, Button, Textarea } from './NoteForm.styled';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export const ModalEditForm = ({ onSubmit, textValue, item, onClose }) => {
-  const [text, setText] = useState(textValue);
+export const NoteForm = ({ onSubmit }) => {
   const errorNotification = () => toast.error('You have to write something!');
 
   const handleSubmit = e => {
     e.preventDefault();
 
     const form = e.target;
-    const newTask = e.target.elements.task.value;
+    const noteName = e.target.elements.name.value;
+    const noteContent = e.target.elements.content.value;
 
-    if (newTask.length === 0) {
+    if (noteName.length === 0 && noteContent.length === 0) {
       errorNotification();
       return;
     }
 
-    item['text'] = newTask;
+    const newItem = {
+      name: noteName,
+      content: noteContent,
+    };
 
-    onSubmit(item.id, item);
-    onClose();
-
+    onSubmit(newItem);
     form.reset();
   };
   return (
     <>
-      <Title>Change your task:</Title>
       <Form onSubmit={handleSubmit}>
         <Field
           type="text"
-          name="task"
-          placeholder="Enter task text..."
-          onChange={e => setText(e.currentTarget.value)}
-          value={text}
+          name="name"
+          placeholder="Enter name of your note..."
+          required
         />
-
-        <Button type="submit">Edit task</Button>
+        <Textarea
+          type="text"
+          name="content"
+          as="textarea"
+          placeholder="Enter your note..."
+          required
+        />
+        <Button type="submit">Add note</Button>
       </Form>
       <ToastContainer
         position="top-right"

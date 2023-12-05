@@ -1,0 +1,11 @@
+1. add note -----------------------------------------------------------------  ++++
+2. redirect to all notes ----------------------------------------------------  ++++
+3. if edit cliked, redirect to edit page with note --------------------------  ++++
+4. edit note with [author, new_content, created_at], ------------------------  ++++
+5. show comments in modal ---------------------------------------------------  ++++
+6. make settings for LS or DB (redux)
+7. make LS
+8. connect to Firebase DB
+9. CSS Bootstrap
+10. Validate forms
+11. Tests

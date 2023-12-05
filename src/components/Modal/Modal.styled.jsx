@@ -16,8 +16,8 @@ export const Overlay = styled.div`
 export const ModalDiv = styled.div`
   max-width: calc(100vw - 48px);
   max-height: calc(100vh - 24px);
-  width: 450px;
-  height: 200px;
+  // width: 450px;
+  // height: 200px;
   border: 1px solid ${p => p.theme.colors.primary};
   border-radius: 4px;
   background-color: ${p => p.theme.colors.white};

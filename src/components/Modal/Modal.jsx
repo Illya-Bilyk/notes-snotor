@@ -1,6 +1,6 @@
 import { Box } from 'components/Box';
 import { Overlay, ModalDiv } from './Modal.styled';
-import { Btn } from 'components/TaskItem/TaskItem.styled';
+import { Btn } from 'components/NoteItem/NoteItem.styled';
 
 export const Modal = ({ children, onClose }) => {
   return (
