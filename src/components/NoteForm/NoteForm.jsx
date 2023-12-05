@@ -20,6 +20,7 @@ export const NoteForm = ({ onSubmit }) => {
     const newItem = {
       name: noteName,
       content: noteContent,
+      comments: [],
     };
 
     onSubmit(newItem);

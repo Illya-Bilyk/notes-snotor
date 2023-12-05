@@ -2,7 +2,7 @@ import { Box } from '../Box';
 import { NavItem, TitleItem, SettingsButton } from './AppBar.styled';
 import { useModal } from 'hooks/useModal';
 import { Modal } from 'components/Modal/Modal';
-import { ModalSettings } from 'components/ModalSettings/ModalSetting';
+import ModalSettings from 'components/ModalSettings/ModalSetting';
 
 const navItems = [
   { href: '/', text: 'Add/Edit Note' },
@@ -39,7 +39,7 @@ export const AppBar = () => {
       </Box>
       {isModalOpen && (
         <Modal onClose={closeModal}>
-          <ModalSettings />
+          <ModalSettings onClose={closeModal} />
         </Modal>
       )}
     </>

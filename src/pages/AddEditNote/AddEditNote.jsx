@@ -1,15 +1,17 @@
-// import { HomeItem } from './AddNote.styled';
 import { Box } from '../../components/Box';
 import * as API from '../../services/api';
+import * as LS from '../../services/localStorage';
 import { useNavigate } from 'react-router-dom';
 import { NoteForm, NoteEditForm } from 'components/NoteForm';
+import { connect } from 'react-redux';
 
-export const AddNote = ({ noteToEdit }) => {
+const AddEditNote = ({ noteToEdit, savedType, afterSubmitEdit }) => {
   const navigate = useNavigate();
 
   const handleSubmit = async note => {
     try {
-      await API.addNote(note);
+      savedType === 'ls' ? LS.addNote(note) : await API.addNote(note);
+
       navigate('/notes');
     } catch (error) {
       console.log(error);
@@ -18,8 +20,11 @@ export const AddNote = ({ noteToEdit }) => {
 
   const handleEditSubmit = async note => {
     try {
-      await API.updateNote(note.id, note);
+      savedType === 'ls'
+        ? LS.updateNote(note.id, note)
+        : await API.updateNote(note.id, note);
       navigate('/notes');
+      afterSubmitEdit();
     } catch (error) {
       console.log(error.message);
     }
@@ -41,7 +46,10 @@ export const AddNote = ({ noteToEdit }) => {
       ) : (
         <NoteForm onSubmit={handleSubmit} />
       )}
-      {/* <HomeItem to="tasks">To your tasks</HomeItem> */}
     </Box>
   );
 };
+
+const mapStateToProps = state => state;
+
+export default connect(mapStateToProps)(AddEditNote);
