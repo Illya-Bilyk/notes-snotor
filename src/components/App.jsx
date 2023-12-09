@@ -14,7 +14,7 @@ const App = ({ onDataBaseType, onLocalStorageType }) => {
     setNote(noteToEdit);
   };
 
-  const afterSubmitEdit = () => {
+  const clearForm = () => {
     setNote(null);
   };
 
@@ -28,12 +28,7 @@ const App = ({ onDataBaseType, onLocalStorageType }) => {
         <Route path="/" element={<Layout />}>
           <Route
             index
-            element={
-              <AddEditNote
-                noteToEdit={note}
-                afterSubmitEdit={afterSubmitEdit}
-              />
-            }
+            element={<AddEditNote noteToEdit={note} clearForm={clearForm} />}
           />
           <Route path="notes" element={<Notes onEdit={onEdit} />} />
           <Route path="about" element={<About />} />

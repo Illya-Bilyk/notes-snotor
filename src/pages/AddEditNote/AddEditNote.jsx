@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { NoteForm, NoteEditForm } from 'components/NoteForm';
 import { connect } from 'react-redux';
 
-const AddEditNote = ({ noteToEdit, savedType, afterSubmitEdit }) => {
+const AddEditNote = ({ noteToEdit, savedType, clearForm }) => {
   const navigate = useNavigate();
 
   const handleSubmit = async note => {
@@ -24,7 +24,7 @@ const AddEditNote = ({ noteToEdit, savedType, afterSubmitEdit }) => {
         ? LS.updateNote(note.id, note)
         : await API.updateNote(note.id, note);
       navigate('/notes');
-      afterSubmitEdit();
+      clearForm();
     } catch (error) {
       console.log(error.message);
     }
@@ -39,7 +39,7 @@ const AddEditNote = ({ noteToEdit, savedType, afterSubmitEdit }) => {
       alignItems="center"
       flexDirection="column"
     >
-      <h1>Notes</h1>
+      <h1>Note</h1>
 
       {noteToEdit ? (
         <NoteEditForm noteToEdit={noteToEdit} onSubmit={handleEditSubmit} />

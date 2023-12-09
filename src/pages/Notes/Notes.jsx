@@ -40,7 +40,11 @@ const Notes = ({ onEdit, savedType }) => {
     }
   };
 
-  return <NotesList items={notes} onDelete={onDelete} onEdit={onEdit} />;
+  return notes ? (
+    <NotesList items={notes} onDelete={onDelete} onEdit={onEdit} />
+  ) : (
+    <p>No notes yet...</p>
+  );
 };
 
 const mapStateToProps = state => state;

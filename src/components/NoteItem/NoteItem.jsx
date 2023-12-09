@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { Wrapper, Text, Btn } from './NoteItem.styled';
 import { useModal } from 'hooks/useModal';
-import { Modal } from 'components/Modal/Modal';
+import { Modal } from 'utils/Modal/Modal';
 import { ModalNote } from 'components/ModalNote/ModalNote';
 
 export const NoteItem = ({ item, onDelete, onEdit }) => {
@@ -49,7 +49,7 @@ export const NoteItem = ({ item, onDelete, onEdit }) => {
         </div>
         {isModalOpen && (
           <Modal onClose={closeModal}>
-            <ModalNote item={item} onDelete={onDelete} onEdit={onEdit} />
+            <ModalNote item={item} onDelete={onDelete} onEdit={editNote} />
           </Modal>
         )}
       </Wrapper>

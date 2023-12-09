@@ -19,7 +19,7 @@ export const ModalNote = ({ item, onDelete, onEdit }) => {
 
         <Text>{content}</Text>
         <ul>
-          {comments.length !== 0 &&
+          {comments &&
             comments.map(comment => {
               return (
                 <li key={comment.createdAt}>
@@ -36,6 +36,7 @@ export const ModalNote = ({ item, onDelete, onEdit }) => {
           style={{
             width: '100%',
             display: 'flex',
+            alignItems: 'space-between',
             justifyContent: 'space-between',
             boxSizing: 'border-box',
             padding: '10px',
