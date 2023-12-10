@@ -1,9 +1,9 @@
-import { Box } from '../../components/Box';
 import * as API from '../../services/api';
 import * as LS from '../../services/localStorage';
 import { useNavigate } from 'react-router-dom';
 import { NoteForm, NoteEditForm } from 'components/NoteForm';
 import { connect } from 'react-redux';
+import { Container } from 'react-bootstrap';
 
 const AddEditNote = ({ noteToEdit, savedType, clearForm }) => {
   const navigate = useNavigate();
@@ -31,22 +31,21 @@ const AddEditNote = ({ noteToEdit, savedType, clearForm }) => {
   };
 
   return (
-    <Box
+    <Container
       as="section"
-      p={4}
-      height="100vh"
-      display="flex"
-      alignItems="center"
-      flexDirection="column"
+      className="flex-column p-0 bg-background border rounded border-secondary w-75"
     >
-      <h1>Note</h1>
-
+      <div className="bg-secondary p-2 px-5">
+        <h1 className="text-light">
+          {noteToEdit ? 'Edit your note' : 'Add new note'}
+        </h1>
+      </div>
       {noteToEdit ? (
         <NoteEditForm noteToEdit={noteToEdit} onSubmit={handleEditSubmit} />
       ) : (
         <NoteForm onSubmit={handleSubmit} />
       )}
-    </Box>
+    </Container>
   );
 };
 

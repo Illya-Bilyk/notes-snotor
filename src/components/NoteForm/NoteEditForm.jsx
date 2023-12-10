@@ -1,4 +1,11 @@
-import { Form, Field, Button, Textarea } from './NoteForm.styled';
+import {
+  Button,
+  Container,
+  FloatingLabel,
+  Form,
+  FormControl,
+  FormGroup,
+} from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -38,38 +45,64 @@ export const NoteEditForm = ({ onSubmit, noteToEdit }) => {
     form.reset();
   };
   return (
-    <>
+    <Container className="w-75 py-4">
       <Form onSubmit={handleSubmit}>
-        <Field
-          type="text"
-          name="name"
-          defaultValue={name}
-          placeholder="Enter name of your note..."
-          required
-        />
-        <Textarea
-          type="text"
-          name="content"
-          as="textarea"
-          defaultValue={content}
-          placeholder="Enter your note..."
-          required
-        />
+        <FormGroup>
+          <FloatingLabel controlId="floatingName" label="Name of your note">
+            <FormControl
+              type="text"
+              name="name"
+              defaultValue={name}
+              placeholder="Enter name of your note..."
+              required
+              className="mb-3"
+            />
+          </FloatingLabel>
+        </FormGroup>
+        <FormGroup>
+          <FloatingLabel controlId="floatingName" label="Your note">
+            <FormControl
+              type="text"
+              as="textarea"
+              rows={6}
+              name="content"
+              defaultValue={content}
+              placeholder="Enter your note..."
+              required
+              className="h-100 mb-3"
+            />
+          </FloatingLabel>
+        </FormGroup>
 
-        <Field
-          type="text"
-          name="author"
-          placeholder="Enter your name..."
-          required
-        />
-        <Textarea
-          type="text"
-          name="comment"
-          as="textarea"
-          placeholder="Enter your comment..."
-          required
-        />
-        <Button type="submit">Edit note</Button>
+        <FormGroup>
+          <FloatingLabel controlId="floatingName" label="Enter your name...">
+            <FormControl
+              type="text"
+              name="author"
+              placeholder="Enter your name..."
+              required
+              className="mb-3"
+            />
+          </FloatingLabel>
+        </FormGroup>
+
+        <FormGroup>
+          <FloatingLabel controlId="floatingName" label="Enter comment...">
+            <FormControl
+              type="text"
+              name="comment"
+              as="textarea"
+              rows={3}
+              placeholder="Enter your comment..."
+              required
+              className="h-100 mb-3"
+            />
+          </FloatingLabel>
+        </FormGroup>
+
+        <Button type="submit" variant="secondary">
+          Edit note
+        </Button>
       </Form>
       <ToastContainer
         position="top-right"
@@ -83,6 +116,6 @@ export const NoteEditForm = ({ onSubmit, noteToEdit }) => {
         pauseOnHover
         theme="light"
       />
-    </>
+    </Container>
   );
 };

@@ -1,4 +1,11 @@
-import { Form, Field, Button, Textarea } from './NoteForm.styled';
+import {
+  Button,
+  Container,
+  FloatingLabel,
+  Form,
+  FormControl,
+  FormGroup,
+} from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -27,22 +34,35 @@ export const NoteForm = ({ onSubmit }) => {
     form.reset();
   };
   return (
-    <>
+    <Container className="w-75 py-4">
       <Form onSubmit={handleSubmit}>
-        <Field
-          type="text"
-          name="name"
-          placeholder="Enter name of your note..."
-          required
-        />
-        <Textarea
-          type="text"
-          name="content"
-          as="textarea"
-          placeholder="Enter your note..."
-          required
-        />
-        <Button type="submit">Add note</Button>
+        <FormGroup>
+          <FloatingLabel controlId="floatingName" label="Name of your note">
+            <FormControl
+              type="text"
+              name="name"
+              placeholder="Enter name of your note..."
+              required
+              className="w-75 mb-3"
+            />
+          </FloatingLabel>
+        </FormGroup>
+        <FormGroup>
+          <FloatingLabel controlId="floatingContent" label="Your note">
+            <FormControl
+              type="text"
+              as="textarea"
+              rows={6}
+              name="content"
+              placeholder="Enter your note..."
+              required
+              className="h-100 w-75 mb-3"
+            />
+          </FloatingLabel>
+        </FormGroup>
+        <Button type="submit" variant="secondary">
+          Add note
+        </Button>
       </Form>
       <ToastContainer
         position="top-right"
@@ -56,6 +76,6 @@ export const NoteForm = ({ onSubmit }) => {
         pauseOnHover
         theme="light"
       />
-    </>
+    </Container>
   );
 };
