@@ -1,2 +1,4 @@
 export const SET_DB_SETTINGS = 'SET_DB_SETTINGS';
 export const SET_LS_SETTINGS = 'SET_LS_SETTINGS';
+export const START_EDITING = 'START_EDITING';
+export const END_EDITING = 'END_EDITING';

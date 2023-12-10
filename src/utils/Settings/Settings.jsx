@@ -22,6 +22,7 @@ const Settings = props => {
       title="Settings"
       variant="primary"
       className="px-3"
+      disabled={props.editing}
     >
       <DropdownItem id="ls" onClick={() => setSettings('ls')}>
         Local Storage

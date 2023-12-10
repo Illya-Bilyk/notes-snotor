@@ -35,15 +35,19 @@ const AddEditNote = ({ noteToEdit, savedType, clearForm }) => {
       as="section"
       className="flex-column p-0 bg-background border rounded border-secondary w-75"
     >
-      <div className="bg-secondary p-2 px-5">
+      <div className="bg-secondary p-2 px-5 d-flex justify-content-between align-items-center">
         <h1 className="text-light">
           {noteToEdit ? 'Edit your note' : 'Add a new note'}
         </h1>
       </div>
       {noteToEdit ? (
-        <NoteEditForm noteToEdit={noteToEdit} onSubmit={handleEditSubmit} />
+        <NoteEditForm
+          noteToEdit={noteToEdit}
+          onSubmit={handleEditSubmit}
+          savedType={savedType}
+        />
       ) : (
-        <NoteForm onSubmit={handleSubmit} />
+        <NoteForm onSubmit={handleSubmit} savedType={savedType} />
       )}
     </Container>
   );

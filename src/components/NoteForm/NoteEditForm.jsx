@@ -9,7 +9,7 @@ import {
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export const NoteEditForm = ({ onSubmit, noteToEdit }) => {
+export const NoteEditForm = ({ onSubmit, noteToEdit, savedType }) => {
   const errorNotification = () => toast.error('You have to write something!');
 
   const { name, content, id } = noteToEdit;
@@ -46,9 +46,13 @@ export const NoteEditForm = ({ onSubmit, noteToEdit }) => {
   };
   return (
     <Container className="p-4">
+      <p className="text-dark">
+        Current storage:
+        <strong> {savedType === 'ls' ? 'Local' : 'Firebase'}</strong>
+      </p>
       <Form onSubmit={handleSubmit}>
         <FormGroup>
-          <FloatingLabel controlId="floatingName" label="Name of your note">
+          <FloatingLabel controlId="floatingEditName" label="Name of your note">
             <FormControl
               type="text"
               name="name"
@@ -60,7 +64,7 @@ export const NoteEditForm = ({ onSubmit, noteToEdit }) => {
           </FloatingLabel>
         </FormGroup>
         <FormGroup>
-          <FloatingLabel controlId="floatingName" label="Your note">
+          <FloatingLabel controlId="floatingEditContent" label="Your note">
             <FormControl
               type="text"
               as="textarea"
@@ -75,7 +79,10 @@ export const NoteEditForm = ({ onSubmit, noteToEdit }) => {
         </FormGroup>
 
         <FormGroup>
-          <FloatingLabel controlId="floatingName" label="Enter your name...">
+          <FloatingLabel
+            controlId="floatingEditAuthor"
+            label="Enter your name..."
+          >
             <FormControl
               type="text"
               name="author"
@@ -87,7 +94,10 @@ export const NoteEditForm = ({ onSubmit, noteToEdit }) => {
         </FormGroup>
 
         <FormGroup>
-          <FloatingLabel controlId="floatingName" label="Enter comment...">
+          <FloatingLabel
+            controlId="floatingEditComment"
+            label="Enter comment..."
+          >
             <FormControl
               type="text"
               name="comment"

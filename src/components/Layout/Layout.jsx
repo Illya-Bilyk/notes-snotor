@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { AppBar } from '../AppBar/AppBar';
 import { Container } from 'react-bootstrap';
+import { Footer } from 'components/Footer/Footer';
 
 export const Layout = () => {
   return (
@@ -10,6 +11,9 @@ export const Layout = () => {
       </Container>
       <Container as="main">
         <Outlet />
+      </Container>
+      <Container as="footer" fluid className="bg-dark position-fixed bottom-0">
+        <Footer />
       </Container>
     </>
   );

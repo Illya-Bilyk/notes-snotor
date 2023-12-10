@@ -5,17 +5,29 @@ import Notes from 'pages/Notes/Notes';
 import { About } from 'pages/About/About';
 import { useState } from 'react';
 import { connect } from 'react-redux';
-import { SET_DB_SETTINGS, SET_LS_SETTINGS } from 'store/actions';
+import {
+  END_EDITING,
+  SET_DB_SETTINGS,
+  SET_LS_SETTINGS,
+  START_EDITING,
+} from 'store/actions';
 
-const App = ({ onDataBaseType, onLocalStorageType }) => {
+const App = ({
+  onDataBaseType,
+  onLocalStorageType,
+  onStartEditing,
+  onEndEditing,
+}) => {
   const [note, setNote] = useState();
 
   const onEdit = noteToEdit => {
     setNote(noteToEdit);
+    onStartEditing();
   };
 
   const clearForm = () => {
     setNote(null);
+    onEndEditing();
   };
 
   const settings = localStorage.getItem('settings');
@@ -42,6 +54,8 @@ const mapDispatchToProps = dispatch => {
   return {
     onDataBaseType: () => dispatch({ type: SET_DB_SETTINGS }),
     onLocalStorageType: () => dispatch({ type: SET_LS_SETTINGS }),
+    onStartEditing: () => dispatch({ type: START_EDITING }),
+    onEndEditing: () => dispatch({ type: END_EDITING }),
   };
 };
 

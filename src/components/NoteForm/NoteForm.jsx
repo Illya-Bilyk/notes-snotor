@@ -9,7 +9,7 @@ import {
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export const NoteForm = ({ onSubmit }) => {
+export const NoteForm = ({ onSubmit, savedType }) => {
   const errorNotification = () => toast.error('You have to write something!');
 
   const handleSubmit = e => {
@@ -35,6 +35,10 @@ export const NoteForm = ({ onSubmit }) => {
   };
   return (
     <Container className="p-4">
+      <p className="text-dark">
+        Current storage:
+        <strong> {savedType === 'ls' ? 'Local' : 'Firebase'}</strong>
+      </p>
       <Form onSubmit={handleSubmit}>
         <FormGroup>
           <FloatingLabel controlId="floatingName" label="Name of note">

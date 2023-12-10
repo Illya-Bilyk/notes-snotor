@@ -4,6 +4,9 @@ import * as LS from '../../services/localStorage';
 import { useState, useEffect } from 'react';
 import { NotesList } from 'components/NotesList/NotesList';
 import { connect } from 'react-redux';
+import { LinkContainer } from 'react-router-bootstrap';
+import { Button } from 'react-bootstrap';
+import Settings from 'utils/Settings/Settings';
 
 const Notes = ({ onEdit, savedType }) => {
   const [notes, setNotes] = useState([]);
@@ -40,10 +43,17 @@ const Notes = ({ onEdit, savedType }) => {
     }
   };
 
-  return notes || notes.length !== 0 ? (
+  return notes && notes.length !== 0 ? (
     <NotesList items={notes} onDelete={onDelete} onEdit={onEdit} />
   ) : (
-    <p className="text-info">No notes yet...</p>
+    <>
+      <h3 className="text-secondary mb-3">No notes yet...</h3>
+      <div className="d-flex">
+        <LinkContainer to="/">
+          <Button variant="primary">Go to adding</Button>
+        </LinkContainer>
+      </div>
+    </>
   );
 };
 

@@ -1,60 +1,19 @@
-import { Wrapper, Text, Btn } from '../NoteItem/NoteItem.styled';
+import { NoteItemCard } from 'components/NoteItem/NoteItemCard';
+import { ModalHeader } from 'react-bootstrap';
 
-export const ModalNote = ({ item, onDelete, onEdit }) => {
-  const { name, content, id, comments } = item;
-
+export const ModalNote = ({ item, onDelete, onEdit, onHide }) => {
   return (
-    <div
-      style={{
-        width: '700px',
-        height: '600px',
-        display: 'flex',
-        boxSizing: 'border-box',
-      }}
-    >
-      <Wrapper>
-        <Text>
-          <strong>{name}</strong>
-        </Text>
-
-        <Text>{content}</Text>
-        <ul>
-          {comments &&
-            comments.map(comment => {
-              return (
-                <li key={comment.createdAt}>
-                  <Text>
-                    <strong>{comment.author}</strong>
-                  </Text>
-                  <Text>{comment.noteComment}</Text>
-                  <Text>{comment.createdAt}</Text>
-                </li>
-              );
-            })}
-        </ul>
-        <div
-          style={{
-            width: '100%',
-            display: 'flex',
-            alignItems: 'space-between',
-            justifyContent: 'space-between',
-            boxSizing: 'border-box',
-            padding: '10px',
-          }}
-        >
-          <Btn type="button" onClick={onEdit}>
-            Edit
-          </Btn>
-          <Btn
-            type="button"
-            onClick={() => {
-              onDelete(id);
-            }}
-          >
-            X
-          </Btn>
-        </div>
-      </Wrapper>
-    </div>
+    <>
+      <ModalHeader className="bg-background" closeButton>
+        <h4 className=" text-primary m-0">Note</h4>
+      </ModalHeader>
+      <NoteItemCard
+        item={item}
+        editNote={onEdit}
+        onDelete={onDelete}
+        showComments={true}
+        comments={item.comments}
+      />
+    </>
   );
 };

@@ -7,8 +7,8 @@
 7. make LS ------------------------------------------------------------------  ++++
 8. connect to Firebase DB ---------------------------------------------------  ++++
 9. CSS Bootstrap
-    9.1 Card for notes
-    9.2 Modal or something for comments
+    9.1 Card for notes +
+    9.2 Modal or something for comments +
     9.3 Card About us
     9.4 Footer
 10. Validate forms
