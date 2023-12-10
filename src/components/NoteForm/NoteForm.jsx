@@ -34,16 +34,16 @@ export const NoteForm = ({ onSubmit }) => {
     form.reset();
   };
   return (
-    <Container className="w-75 py-4">
+    <Container className="p-4">
       <Form onSubmit={handleSubmit}>
         <FormGroup>
-          <FloatingLabel controlId="floatingName" label="Name of your note">
+          <FloatingLabel controlId="floatingName" label="Name of note">
             <FormControl
               type="text"
               name="name"
               placeholder="Enter name of your note..."
               required
-              className="w-75 mb-3"
+              className="mb-3"
             />
           </FloatingLabel>
         </FormGroup>
@@ -56,7 +56,7 @@ export const NoteForm = ({ onSubmit }) => {
               name="content"
               placeholder="Enter your note..."
               required
-              className="h-100 w-75 mb-3"
+              className="h-100 mb-3"
             />
           </FloatingLabel>
         </FormGroup>

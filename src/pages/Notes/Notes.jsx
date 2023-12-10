@@ -40,10 +40,10 @@ const Notes = ({ onEdit, savedType }) => {
     }
   };
 
-  return notes ? (
+  return notes || notes.length !== 0 ? (
     <NotesList items={notes} onDelete={onDelete} onEdit={onEdit} />
   ) : (
-    <p>No notes yet...</p>
+    <p className="text-info">No notes yet...</p>
   );
 };
 

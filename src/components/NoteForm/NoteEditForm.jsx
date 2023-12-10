@@ -45,7 +45,7 @@ export const NoteEditForm = ({ onSubmit, noteToEdit }) => {
     form.reset();
   };
   return (
-    <Container className="w-75 py-4">
+    <Container className="p-4">
       <Form onSubmit={handleSubmit}>
         <FormGroup>
           <FloatingLabel controlId="floatingName" label="Name of your note">

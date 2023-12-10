@@ -37,7 +37,7 @@ const AddEditNote = ({ noteToEdit, savedType, clearForm }) => {
     >
       <div className="bg-secondary p-2 px-5">
         <h1 className="text-light">
-          {noteToEdit ? 'Edit your note' : 'Add new note'}
+          {noteToEdit ? 'Edit your note' : 'Add a new note'}
         </h1>
       </div>
       {noteToEdit ? (

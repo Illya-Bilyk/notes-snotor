@@ -6,20 +6,22 @@ axios.defaults.baseURL =
 export const getNotes = async () => {
   const response = await axios.get('/notes.json');
 
-  const values = Object.values(response.data);
-  const ids = Object.keys(response.data);
+  if (response.data) {
+    const values = Object.values(response.data);
+    const ids = Object.keys(response.data);
 
-  const notes = [];
+    const notes = [];
 
-  ids.forEach((id, index) => {
-    values.forEach((value, indexValue) => {
-      if (index === indexValue) {
-        return notes.push({ id, ...value });
-      }
+    ids.forEach((id, index) => {
+      values.forEach((value, indexValue) => {
+        if (index === indexValue) {
+          return notes.push({ id, ...value });
+        }
+      });
     });
-  });
 
-  return notes;
+    return notes;
+  } else return [];
 };
 
 export const getNoteById = async id => {
