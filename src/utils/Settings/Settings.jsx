@@ -10,10 +10,24 @@ import { connect } from 'react-redux';
 import { SET_DB_SETTINGS, SET_LS_SETTINGS } from 'store/actions';
 
 const Settings = props => {
-  const [settings, setSettings] = useState('ls');
+  const [settings, setSettings] = useState('');
 
   useEffect(() => {
-    settings === 'ls' ? props.onLocalStorageType() : props.onDataBaseType();
+    const lsSettings = localStorage.getItem('settings');
+    setSettings(lsSettings);
+  }, []);
+
+  useEffect(() => {
+    switch (settings) {
+      case 'ls':
+        props.onLocalStorageType();
+        break;
+      case 'db':
+        props.onDataBaseType();
+        break;
+      default:
+        return;
+    }
   }, [props, settings]);
 
   return (

@@ -53,6 +53,10 @@ export const updateNote = async (id, newNote) => {
 
     const newNotes = [...notesToUpdate, updatedNote];
     localStorage.setItem('notes', JSON.stringify(newNotes));
+
+    const updatedNotes = await getNotes();
+
+    return updatedNotes;
   } catch (error) {
     console.log(error);
   }

@@ -30,9 +30,9 @@ const App = ({
     onEndEditing();
   };
 
-  const settings = localStorage.getItem('settings');
+  const lsSettings = localStorage.getItem('settings');
 
-  settings === 'ls' ? onLocalStorageType() : onDataBaseType();
+  lsSettings === 'ls' ? onLocalStorageType() : onDataBaseType();
 
   return (
     <>
@@ -42,7 +42,10 @@ const App = ({
             index
             element={<AddEditNote noteToEdit={note} clearForm={clearForm} />}
           />
-          <Route path="notes" element={<Notes onEdit={onEdit} />} />
+          <Route
+            path="notes"
+            element={<Notes onEdit={onEdit} noteToEdit={note} />}
+          />
           <Route path="about" element={<About />} />
         </Route>
       </Routes>

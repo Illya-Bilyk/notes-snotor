@@ -6,7 +6,7 @@ import {
 } from './actions';
 
 const intialState = {
-  savedType: 'ls',
+  savedType: '',
   editing: false,
 };
 

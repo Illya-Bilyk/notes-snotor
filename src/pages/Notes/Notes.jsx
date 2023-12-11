@@ -6,9 +6,8 @@ import { NotesList } from 'components/NotesList/NotesList';
 import { connect } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Button } from 'react-bootstrap';
-import Settings from 'utils/Settings/Settings';
 
-const Notes = ({ onEdit, savedType }) => {
+const Notes = ({ onEdit, savedType, noteToEdit, editing }) => {
   const [notes, setNotes] = useState([]);
   const [settings, setSettings] = useState('');
 
@@ -26,12 +25,15 @@ const Notes = ({ onEdit, savedType }) => {
         console.log(error);
       }
     };
-
     if (settings !== savedType) {
       setSettings(savedType);
       fetchTasks();
     }
-  }, [savedType, settings]);
+
+    if (settings === 'ls' && noteToEdit === null && editing === false) {
+      fetchTasks();
+    }
+  }, [editing, noteToEdit, savedType, settings]);
 
   const onDelete = async id => {
     try {

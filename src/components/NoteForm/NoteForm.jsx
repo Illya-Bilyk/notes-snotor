@@ -6,58 +6,70 @@ import {
   FormControl,
   FormGroup,
 } from 'react-bootstrap';
+import { useFormik } from 'formik';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export const NoteForm = ({ onSubmit, savedType }) => {
   const errorNotification = () => toast.error('You have to write something!');
 
-  const handleSubmit = e => {
-    e.preventDefault();
+  const handleSubmit = values => {
+    const { name, content } = values;
 
-    const form = e.target;
-    const noteName = e.target.elements.name.value;
-    const noteContent = e.target.elements.content.value;
-
-    if (noteName.length === 0 && noteContent.length === 0) {
+    if (name.length === 0 && content.length === 0) {
       errorNotification();
       return;
     }
 
     const newItem = {
-      name: noteName,
-      content: noteContent,
+      name,
+      content,
       comments: [],
     };
 
     onSubmit(newItem);
-    form.reset();
+    formik.resetForm();
   };
+
+  const formik = useFormik({
+    initialValues: {
+      name: '',
+      content: '',
+    },
+    onSubmit: handleSubmit,
+  });
+
   return (
     <Container className="p-4">
       <p className="text-dark">
         Current storage:
         <strong> {savedType === 'ls' ? 'Local' : 'Firebase'}</strong>
       </p>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={formik.handleSubmit}>
         <FormGroup>
-          <FloatingLabel controlId="floatingName" label="Name of note">
+          <FloatingLabel label="Name of note">
             <FormControl
               type="text"
+              id="name"
               name="name"
               placeholder="Enter name of your note..."
               required
               className="mb-3"
+              value={formik.values.name}
+              onChange={formik.handleChange}
             />
           </FloatingLabel>
         </FormGroup>
         <FormGroup>
-          <FloatingLabel controlId="floatingContent" label="Your note">
+          <FloatingLabel label="Your note">
             <FormControl
               type="text"
               as="textarea"
               rows={6}
+              id="content"
               name="content"
+              value={formik.values.content}
+              onChange={formik.handleChange}
               placeholder="Enter your note..."
               required
               className="h-100 mb-3"
