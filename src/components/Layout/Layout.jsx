@@ -5,16 +5,22 @@ import { Footer } from 'components/Footer/Footer';
 
 export const Layout = () => {
   return (
-    <>
-      <Container as="header" fluid className="p-0 mb-3">
-        <AppBar />
-      </Container>
-      <Container as="main">
-        <Outlet />
-      </Container>
-      <Container as="footer" fluid className="bg-dark position-fixed bottom-0">
+    <Container
+      fluid
+      className="p-0 d-flex flex-column justify-content-between"
+      style={{ height: '100vh' }}
+    >
+      <div>
+        <Container as="header" fluid className="p-0 mb-3">
+          <AppBar />
+        </Container>
+        <Container as="main" className="p-2">
+          <Outlet />
+        </Container>
+      </div>
+      <Container as="footer" fluid className="page-footer bg-dark">
         <Footer />
       </Container>
-    </>
+    </Container>
   );
 };

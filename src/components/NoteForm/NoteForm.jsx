@@ -5,21 +5,14 @@ import {
   Form,
   FormControl,
   FormGroup,
+  FormText,
 } from 'react-bootstrap';
 import { useFormik } from 'formik';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { addingSchema } from 'utils/validationSchemas';
 
 export const NoteForm = ({ onSubmit, savedType }) => {
-  const errorNotification = () => toast.error('You have to write something!');
-
   const handleSubmit = values => {
     const { name, content } = values;
-
-    if (name.length === 0 && content.length === 0) {
-      errorNotification();
-      return;
-    }
 
     const newItem = {
       name,
@@ -36,6 +29,7 @@ export const NoteForm = ({ onSubmit, savedType }) => {
       name: '',
       content: '',
     },
+    validationSchema: addingSchema,
     onSubmit: handleSubmit,
   });
 
@@ -45,8 +39,8 @@ export const NoteForm = ({ onSubmit, savedType }) => {
         Current storage:
         <strong> {savedType === 'ls' ? 'Local' : 'Firebase'}</strong>
       </p>
-      <Form onSubmit={formik.handleSubmit}>
-        <FormGroup>
+      <Form noValidate onSubmit={formik.handleSubmit}>
+        <FormGroup className="mb-3">
           <FloatingLabel label="Name of note">
             <FormControl
               type="text"
@@ -54,13 +48,19 @@ export const NoteForm = ({ onSubmit, savedType }) => {
               name="name"
               placeholder="Enter name of your note..."
               required
-              className="mb-3"
               value={formik.values.name}
               onChange={formik.handleChange}
+              isValid={formik.touched.name && !formik.errors.name}
+              isInvalid={formik.touched.name && formik.errors.name}
             />
           </FloatingLabel>
+          <FormText>
+            {formik.touched.name && formik.errors.name ? (
+              <div className="text-danger p-2">{formik.errors.name}</div>
+            ) : null}
+          </FormText>
         </FormGroup>
-        <FormGroup>
+        <FormGroup className="mb-3">
           <FloatingLabel label="Your note">
             <FormControl
               type="text"
@@ -72,26 +72,21 @@ export const NoteForm = ({ onSubmit, savedType }) => {
               onChange={formik.handleChange}
               placeholder="Enter your note..."
               required
-              className="h-100 mb-3"
+              className="h-100"
+              isValid={formik.touched.content && !formik.errors.content}
+              isInvalid={formik.touched.content && formik.errors.content}
             />
           </FloatingLabel>
+          <FormText>
+            {formik.touched.content && formik.errors.content ? (
+              <div className="text-danger p-2">{formik.errors.content}</div>
+            ) : null}
+          </FormText>
         </FormGroup>
         <Button type="submit" variant="secondary">
           Add note
         </Button>
       </Form>
-      <ToastContainer
-        position="top-right"
-        autoClose={1000}
-        hideProgressBar={true}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
     </Container>
   );
 };

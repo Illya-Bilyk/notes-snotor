@@ -5,23 +5,16 @@ import {
   Form,
   FormControl,
   FormGroup,
+  FormText,
 } from 'react-bootstrap';
 import { useFormik } from 'formik';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { editingSchema } from 'utils/validationSchemas';
 
 export const NoteEditForm = ({ onSubmit, noteToEdit, savedType }) => {
-  const errorNotification = () => toast.error('You have to write something!');
-
   const { name, content, id } = noteToEdit;
 
   const handleSubmit = values => {
     const { name, content, author, noteComment } = values;
-
-    if (name.length === 0 && content.length === 0) {
-      errorNotification();
-      return;
-    }
 
     const createdAt = new Date().toLocaleString();
 
@@ -47,6 +40,7 @@ export const NoteEditForm = ({ onSubmit, noteToEdit, savedType }) => {
       author: '',
       comment: '',
     },
+    validationSchema: editingSchema,
     onSubmit: handleSubmit,
   });
 
@@ -56,8 +50,8 @@ export const NoteEditForm = ({ onSubmit, noteToEdit, savedType }) => {
         Current storage:
         <strong> {savedType === 'ls' ? 'Local' : 'Firebase'}</strong>
       </p>
-      <Form onSubmit={formik.handleSubmit}>
-        <FormGroup>
+      <Form noValidate onSubmit={formik.handleSubmit}>
+        <FormGroup className="mb-3">
           <FloatingLabel label="Name of your note">
             <FormControl
               type="text"
@@ -65,14 +59,19 @@ export const NoteEditForm = ({ onSubmit, noteToEdit, savedType }) => {
               name="name"
               value={formik.values.name}
               onChange={formik.handleChange}
-              // defaultValue={name}
               placeholder="Enter name of your note..."
               required
-              className="mb-3"
+              isValid={formik.touched.name && !formik.errors.name}
+              isInvalid={formik.touched.name && formik.errors.name}
             />
           </FloatingLabel>
+          <FormText>
+            {formik.touched.name && formik.errors.name ? (
+              <div className="text-danger p-2">{formik.errors.name}</div>
+            ) : null}
+          </FormText>
         </FormGroup>
-        <FormGroup>
+        <FormGroup className="mb-3">
           <FloatingLabel label="Your note">
             <FormControl
               type="text"
@@ -82,15 +81,21 @@ export const NoteEditForm = ({ onSubmit, noteToEdit, savedType }) => {
               name="content"
               value={formik.values.content}
               onChange={formik.handleChange}
-              // defaultValue={content}
               placeholder="Enter your note..."
               required
-              className="h-100 mb-3"
+              className="h-100"
+              isValid={formik.touched.content && !formik.errors.content}
+              isInvalid={formik.touched.content && formik.errors.content}
             />
           </FloatingLabel>
+          <FormText>
+            {formik.touched.content && formik.errors.content ? (
+              <div className="text-danger p-2">{formik.errors.content}</div>
+            ) : null}
+          </FormText>
         </FormGroup>
 
-        <FormGroup>
+        <FormGroup className="mb-3">
           <FloatingLabel label="Enter your name...">
             <FormControl
               type="text"
@@ -100,12 +105,18 @@ export const NoteEditForm = ({ onSubmit, noteToEdit, savedType }) => {
               onChange={formik.handleChange}
               placeholder="Enter your name..."
               required
-              className="mb-3"
+              isValid={formik.touched.author && !formik.errors.author}
+              isInvalid={formik.touched.author && formik.errors.author}
             />
           </FloatingLabel>
+          <FormText>
+            {formik.touched.author && formik.errors.author ? (
+              <div className="text-danger p-2">{formik.errors.author}</div>
+            ) : null}
+          </FormText>
         </FormGroup>
 
-        <FormGroup>
+        <FormGroup className="mb-3">
           <FloatingLabel label="Enter comment...">
             <FormControl
               type="text"
@@ -117,27 +128,24 @@ export const NoteEditForm = ({ onSubmit, noteToEdit, savedType }) => {
               rows={3}
               placeholder="Enter your comment..."
               required
-              className="h-100 mb-3"
+              className="h-100"
+              isValid={formik.touched.noteComment && !formik.errors.noteComment}
+              isInvalid={
+                formik.touched.noteComment && formik.errors.noteComment
+              }
             />
           </FloatingLabel>
+          <FormText>
+            {formik.touched.noteComment && formik.errors.noteComment ? (
+              <div className="text-danger p-2">{formik.errors.noteComment}</div>
+            ) : null}
+          </FormText>
         </FormGroup>
 
         <Button type="submit" variant="secondary">
           Edit note
         </Button>
       </Form>
-      <ToastContainer
-        position="top-right"
-        autoClose={1000}
-        hideProgressBar={true}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
     </Container>
   );
 };
