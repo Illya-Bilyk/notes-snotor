@@ -1,4 +1,4 @@
-import { Container, Row, Col, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Container, ListGroup, ListGroupItem } from 'react-bootstrap';
 
 export const CommnetsList = ({ comments }) => {
   return (
@@ -6,13 +6,14 @@ export const CommnetsList = ({ comments }) => {
       <ListGroup>
         <p className="text-primary">Comments:</p>
         {comments.length !== 0 ? (
-          comments.map(({ author, noteComment }, idx) => {
+          comments.map(({ author, noteComment, createdAt }, idx) => {
             return (
               <ListGroupItem key={idx} className="border rounded mb-2">
                 <p>
                   <strong> {author}:</strong>
                 </p>
                 <p>{noteComment}</p>
+                <p className="text-end">Date: {createdAt}</p>
               </ListGroupItem>
             );
           })
