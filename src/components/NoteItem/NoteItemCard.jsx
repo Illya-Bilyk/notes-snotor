@@ -52,7 +52,7 @@ export const NoteItemCard = ({
           className="m-2 border rounded"
           onClick={editNote}
         >
-          Edit
+          {showComments ? 'Add comment' : 'Edit'}
         </Button>
         <Button
           variant="danger"
