@@ -18,10 +18,10 @@ Follow these steps to set up the project:
 1. Clone the repository to your local machine:
 
    ```bash
-   git clone https://github.com/illya-bilyk/notes-app.git
+   git clone https://github.com/illya-bilyk/notes-snotor.git
    ```
 
-2. Navigate to the project directory: cd notes-app
+2. Navigate to the project directory: cd notes-snotor
 3. Install the project's dependencies using npm: npm install
 4. Start the development mode: npm start
 5. Open your browser and go to http://localhost:3000. The page will
